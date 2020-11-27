@@ -7,12 +7,14 @@ import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CountriesComponent } from './components/countries/countries.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    CountriesComponent
+    CountriesComponent,
+    DashboardCardComponent
   ],
   imports: [
     BrowserModule,

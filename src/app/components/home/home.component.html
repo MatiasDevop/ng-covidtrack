@@ -1,9 +1,9 @@
 <div class="jumbotron bg-white text-center">
     <h1 class="display-3">Corona covid-19 Tracker</h1>
     <hr>
-    <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, tempora dolorem rerum consectetur suscipit non eligendi deleniti quis accusamus voluptates quam possimus ipsam! Nesciunt quae ab magni voluptates facilis laborum.
-    </p>
-    <hr class="my-2">
-    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae reprehenderit, architecto, incidunt maxime doloremque omnis illum illo accusamus aliquam inventore, modi necessitatibus reiciendis mollitia nostrum rerum harum dolor error ducimus.
-    </p>
+    <app-dashboard-card [totalConfirmed]='totalConfirmed'
+        [totalRecovered]='totalRecovered' 
+        [totalDeaths]='totalDeaths'
+        [totalActive]='totalActive'>
+    </app-dashboard-card>
 </div>
