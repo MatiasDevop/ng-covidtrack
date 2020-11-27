@@ -7,12 +7,44 @@
         [totalActive]='totalActive'>
     </app-dashboard-card>
 </div>
+
+<div class="ui form">
+    <div class="inline fields">
+      <label>Select Case type :</label>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" id="c" #c (click)="updateChart(c)" value="c" name="casetype" checked="">
+          <label for='d' >Confirmed</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" #d (click)="updateChart(d)" value='d' id='d' name="casetype">
+          <label for='d'>Deaths</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" (click)="updateChart(r)" value="r" #r id='r' name="casetype">
+          <label for='r'>Recovered</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" (click)="updateChart(a)" value="a" #a id="a" name="casetype">
+          <label for='a'>Active</label>
+        </div>
+      </div>
+    </div>
+  </div>
 <div class="row">
     <div class="col">
-        <google-chart [data]="columnChart"></google-chart>
+        <!-- <google-chart [data]="columnChart"></google-chart> -->
+        <google-chart [type]='chart.PieChart' [options]='chart.options' style="width: 100%;" [height]='chart.height' [data]='datatable'></google-chart>
     </div>
     <div class="col">
-        <google-chart [data]="pieChart"></google-chart>
+        <!-- <google-chart [data]="pieChart"></google-chart> -->
+        <google-chart [type]='chart.ColumnChart' style="width: 100%;" [options]='chart.options' [height]='chart.height' [data]='datatable'></google-chart>
     </div>
 </div>
 
