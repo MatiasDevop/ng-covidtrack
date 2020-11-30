@@ -15,5 +15,34 @@
     [totalRecovered]='totalRecovered' 
     [totalDeaths]='totalDeaths'
     [totalActive]='totalActive'>
-</app-dashboard-card>
+    </app-dashboard-card>
+
+    <div class="card row">
+        <div class="col">
+            <google-chart 
+            [columns]="columnNames"
+            [type]="mytype"
+            [data]="dataTable"
+            >
+            </google-chart>
+        </div>
+
+        <table class="table col">
+            <thead>
+                <tr>
+                    <th>Sno.</th>
+                    <th>Date</th>
+                    <th>Cases</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cs of selectedCountryData; index as i">
+                    <td>{{i+1}}</td>
+                    <td>{{cs.date | date}}</td>
+                    <td>{{cs.cases}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>
