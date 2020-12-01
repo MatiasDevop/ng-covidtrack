@@ -18,21 +18,34 @@ export class CountriesComponent implements OnInit {
   totalRecovered = 0;
   selectedCountryData : DateWiseDate[];
   dateWiseData ;
-  dataTable = [];
+  datatable = [];
  
   title = 'Average Temperatures of Cities';
-  mytype = 'LineChart';
-  columnNames = ["Date", "Cases"];
-  options = {   
-    hAxis: {
-        title: 'Month'
-    },
-    vAxis:{
-        title: 'Temperature'
-    },
-  };
-  width = 550;
-  height = 400;
+  chart = {
+    PieChart : "PieChart" ,
+    ColumnChart : 'ColumnChart' ,
+    LineChart : "LineChart", 
+    height: 500, 
+    options: {
+      height : 500, 
+      animation:{
+        duration: 1000,
+        easing: 'out',
+      },
+    }
+  }
+  // mytype = 'LineChart';
+  // columnNames = ["Date", "Cases"];
+  // options = {   
+  //   hAxis: {
+  //       title: 'Month'
+  //   },
+  //   vAxis:{
+  //       title: 'Temperature'
+  //   },
+  // };
+  // width = 550;
+  // height = 400;
   constructor(private service: DataServiceService) { }
 
   ngOnInit(): void {
@@ -54,12 +67,14 @@ export class CountriesComponent implements OnInit {
   }
 
   updateChart(){
-    let dataTable = [];
-    dataTable.push(["Cases" , 'Date']);
+    this.datatable = [];
+    //this.datatable.push([0 , 0]);
     this.selectedCountryData.forEach(cs => {
-      dataTable.push([cs.cases , cs.date])
+      this.datatable.push([cs.cases , cs.date])
     })
     console.log(this.selectedCountryData);
+    console.log(this.datatable);
+    
     
   }
 
@@ -75,7 +90,6 @@ export class CountriesComponent implements OnInit {
       })
 
       this.selectedCountryData = this.dateWiseData[country];
-      //console.log(this.selectedCountryData);
       this.updateChart();
   }
 

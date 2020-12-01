@@ -17,32 +17,37 @@
     [totalActive]='totalActive'>
     </app-dashboard-card>
 
-    <div class="card row">
+    <div class="row">
+        <div class="col">
+            <table class="table col">
+                <thead>
+                    <tr>
+                        <th>Sno.</th>
+                        <th>Date</th>
+                        <th>Cases</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cs of selectedCountryData; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{cs.date | date}}</td>
+                        <td>{{cs.cases}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <div class="col">
             <google-chart 
-            [columns]="columnNames"
-            [type]="mytype"
-            [data]="dataTable"
+                [type]='chart.LineChart'
+                [options]='chart.options'
+                style="width: 100%;" 
+                [height]='chart.height' 
+                [data]='datatable'
             >
             </google-chart>
         </div>
 
-        <table class="table col">
-            <thead>
-                <tr>
-                    <th>Sno.</th>
-                    <th>Date</th>
-                    <th>Cases</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let cs of selectedCountryData; index as i">
-                    <td>{{i+1}}</td>
-                    <td>{{cs.date | date}}</td>
-                    <td>{{cs.cases}}</td>
-                </tr>
-            </tbody>
-        </table>
+        
     </div>
 
 </div>

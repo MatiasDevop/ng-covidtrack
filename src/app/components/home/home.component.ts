@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleChartInterface } from 'ng2-google-charts';
-import { subscribeOn } from 'rxjs/operators';
 import { GlobalDataSummary } from 'src/app/models/global-Data';
 import { DataServiceService } from 'src/app/services/data-service.service';
 
