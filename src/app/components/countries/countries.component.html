@@ -1,3 +1,7 @@
+<div class="ui inverted dimmer" [class.active]='loading'>
+    <div class="ui text loader">Loading</div>
+</div>
+    
 <div class="jumbotron bg-white text-center">
     <h1 class="display-4">Corona covid-19 Tracker County Wice</h1>
     <hr>
@@ -43,6 +47,7 @@
                 style="width: 100%;" 
                 [height]='chart.height' 
                 [data]='datatable'
+                [columns]="chartColumns"
             >
             </google-chart>
         </div>

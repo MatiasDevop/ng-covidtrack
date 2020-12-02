@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { merge } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { DateWiseDate } from 'src/app/models/date-wise-data';
 import { GlobalDataSummary } from 'src/app/models/global-Data';
 import { DataServiceService } from 'src/app/services/data-service.service';
@@ -19,7 +21,8 @@ export class CountriesComponent implements OnInit {
   selectedCountryData : DateWiseDate[];
   dateWiseData ;
   datatable = [];
- 
+  loading = true;
+  chartColumns = ['Date', 'Cases'];
   title = 'Average Temperatures of Cities';
   chart = {
     PieChart : "PieChart" ,
@@ -34,43 +37,38 @@ export class CountriesComponent implements OnInit {
       },
     }
   }
-  // mytype = 'LineChart';
-  // columnNames = ["Date", "Cases"];
-  // options = {   
-  //   hAxis: {
-  //       title: 'Month'
-  //   },
-  //   vAxis:{
-  //       title: 'Temperature'
-  //   },
-  // };
-  // width = 550;
-  // height = 400;
   constructor(private service: DataServiceService) { }
 
   ngOnInit(): void {
     
-    this.service.getDataWiseData().subscribe(
-      (result) => {
-        this.dateWiseData = result;
-        this.updateChart();
-        //console.log(result);
-        
-    })
-
-    this.service.getGlobalData().subscribe(result =>{
-      this.data = result;
-      this.data.forEach(cs => {
-        this.countries.push(cs.country)
-      });
-    })
+    merge(
+      this.service.getDataWiseData().pipe(
+          map(result => {
+            this.dateWiseData = result;
+          })
+      ),
+      this.service.getGlobalData().pipe(
+          map(result =>{
+            this.data = result;
+            this.data.forEach(cs => {
+              this.countries.push(cs.country)
+            })
+          }))
+      ).subscribe(
+        {
+          complete : () =>{
+            this.updateValues('India');
+            this.loading = false;
+          }
+        }
+      )
   }
 
   updateChart(){
     this.datatable = [];
     //this.datatable.push([0 , 0]);
     this.selectedCountryData.forEach(cs => {
-      this.datatable.push([cs.cases , cs.date])
+      this.datatable.push([cs.date , cs.cases])
     })
     console.log(this.selectedCountryData);
     console.log(this.datatable);

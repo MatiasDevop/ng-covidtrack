@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   totalRecovered = 0;
   globalData : GlobalDataSummary[];
   datatable = [];
-
+  loading = true;
   chart = {
     PieChart : "PieChart" ,
     ColumnChart : 'ColumnChart' ,
@@ -29,12 +29,6 @@ export class HomeComponent implements OnInit {
       is3D: true
     }  
   }
-  // pieChart : GoogleChartInterface ={
-  //   chartType: 'PieChart'
-  // }
-  // columnChart : GoogleChartInterface ={
-  //   chartType: 'ColumnChart'
-  // }
   constructor(private dataService: DataServiceService) { }
 
   ngOnInit(): void {
@@ -51,11 +45,13 @@ export class HomeComponent implements OnInit {
                 this.totalConfirmed += cs.confirmed
                 this.totalDeaths += cs.deaths
                 this.totalRecovered += cs.recovered
-              }
-              
+              }   
             })
 
             this.initChart('c');
+          },
+          complete: () => {
+            this.loading = false;
           }
         }
       )
@@ -91,24 +87,6 @@ export class HomeComponent implements OnInit {
     })
 
     console.log(this.datatable);
-    // this.pieChart = {
-    //   chartType: 'PieChart',
-    //   dataTable: this.datatable,
-    //   //firstRowIsData: true,
-    //   options: {
-    //     height : 500
-    //   },
-    // };
-
-    // this.columnChart = {
-    //   chartType: 'ColumnChart',
-    //   dataTable: this.datatable,
-    //   //firstRowIsData: true,
-    //   options: {
-    //     height : 500
-    //   },
-    // };
-
   }
 
   updateChart(input: HTMLInputElement) {
